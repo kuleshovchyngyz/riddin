@@ -11,7 +11,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'transaction_date', 'amount', 'description', 'user_id'];
+    protected $fillable = ['category_id', 'transaction_date', 'amount', 'description', 'user_id','quantity'];
 
     protected $dates = ['transaction_date'];
 

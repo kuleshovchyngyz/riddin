@@ -11,6 +11,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'user_id'];
+    /**
+     * @var mixed
+     */
+    private $transactions;
 
     protected static function booted()
     {
@@ -19,5 +23,8 @@ class Category extends Model
                 $builder->where('user_id', auth()->id());
             });
         }
+    }
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
     }
 }

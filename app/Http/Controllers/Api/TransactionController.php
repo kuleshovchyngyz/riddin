@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Resources\TransactionResource;
+use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -70,5 +71,12 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return response()->noContent();
+    }
+
+    public function categoryTransactions(Category $category){
+
+        $transactions = $category->transactions;
+        return TransactionResource::collection($transactions);
+
     }
 }

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
     Route::apiResource('transactions',
         \App\Http\Controllers\Api\TransactionController::class);
+    Route::get('{category}/transactions', [\App\Http\Controllers\Api\TransactionController::class, 'categoryTransactions']);
 });
 
 Route::post('/auth/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
