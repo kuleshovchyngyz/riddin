@@ -32,6 +32,7 @@ class StoreTransactionRequest extends FormRequest
             'amount' => 'required',
             'description' => 'required',
             'transaction_date' => 'required|date',
+            'quantity'=>''
         ];
     }
 }

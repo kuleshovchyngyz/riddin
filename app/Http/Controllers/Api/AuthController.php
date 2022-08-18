@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\PersonalAccessToken;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
@@ -63,5 +65,9 @@ class AuthController extends Controller
         }
 
         return response()->noContent();
+    }
+
+    public function user(){
+        return new UserResource( auth()->user());
     }
 }

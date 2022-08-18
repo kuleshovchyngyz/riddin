@@ -25,9 +25,11 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('transactions',
         \App\Http\Controllers\Api\TransactionController::class);
     Route::get('{category}/transactions', [\App\Http\Controllers\Api\TransactionController::class, 'categoryTransactions']);
+    Route::get('/auth/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
 });
 
 Route::post('/auth/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('/auth/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/auth/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+
 

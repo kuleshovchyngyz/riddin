@@ -30,6 +30,7 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
+//        return $request->all();
         $transaction = auth()->user()->transactions()->create($request->validated());
 
         return new TransactionResource($transaction);
