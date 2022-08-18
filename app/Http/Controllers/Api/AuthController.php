@@ -68,6 +68,7 @@ class AuthController extends Controller
     }
 
     public function user(){
+        return 1212;
         return new UserResource( auth()->user());
     }
 }
