@@ -7,7 +7,9 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Category;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
 {
@@ -18,6 +20,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        Storage::disk('local')->append('transactions.txt', Carbon::now().' '.auth()->user()->name);
         return TransactionResource::collection(
             Transaction::with('category')->get());
     }

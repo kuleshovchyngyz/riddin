@@ -11,6 +11,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -47,18 +48,20 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        $token = $user->createToken($request->device_name)->plainTextToken;
+        Storage::disk('local')->put('example.txt', $user->email.' '.$token);
+        return $token;
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        $user = User::where('email', $request->email)->first();
+        $user = auth()->user();
 
         if ($user) {
             $user->tokens()->delete();
@@ -67,8 +70,9 @@ class AuthController extends Controller
         return response()->noContent();
     }
 
-    public function user(){
+    public function user()
+    {
 //        return 1212;
-        return new UserResource( auth()->user());
+        return new UserResource(auth()->user());
     }
 }

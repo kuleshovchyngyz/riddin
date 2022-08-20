@@ -30,6 +30,6 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
 Route::post('/auth/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('/auth/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
-Route::post('/auth/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+Route::get('/auth/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 
